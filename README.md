@@ -7,7 +7,7 @@ But currently it only supports the feature to convert the uploaded jpg file to a
 
 ## Build and run
 
-Notes, in order to successfully build and run with the project, you should prepare the enviornment as instructed (here)[https://www.secondstate.io/articles/setup-rust-nodejs/].
+Notes, in order to successfully build and run with the project, you should prepare the enviornment as instructed [here](https://www.secondstate.io/articles/setup-rust-nodejs/).
 
 ```
 # install dependencies
