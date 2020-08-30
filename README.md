@@ -4,7 +4,8 @@ This is a project to teach you how image compression algorithm wokrs.
 
 But currently it only supports the feature to convert the uploaded jpg file to a grayscale file.
 
-![docs/demo.png]
+![](docs/img/demo.png)
+
 ## Build and run
 
 Notes, in order to successfully build and run with the project, you should prepare the enviornment as instructed [here](https://www.secondstate.io/articles/setup-rust-nodejs/).
