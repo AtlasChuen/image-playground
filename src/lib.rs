@@ -20,22 +20,11 @@ fn visit_block(mut vec: &mut [f64; 64], mut res : &mut [u8; 64]) {
 }
 
 #[wasm_bindgen]
-pub fn save(buffer: &[u8]) -> Vec<u8> {
+pub fn grayscalify(buffer: &[u8]) {
     let img = image::load_from_memory(buffer).unwrap();
-
-    println!("dimensions {:?}", img.dimensions());
-
-    println!("{:?}", img.color());
-
     _initialize();
-
-    // let mut output = File::create(&format!("/test.png")).unwrap();
-    let mut output = File::create("/uploaded/test.jpg").unwrap();
+    let mut output = File::create("/uploaded/uploaded.jpg").unwrap();
     img.grayscale().write_to(&mut output, ImageFormat::Jpeg).unwrap();
-
-    let gray = img.to_rgba();
-    // let gray = img.into_luma();
-    return gray.to_vec();
 }
 
 

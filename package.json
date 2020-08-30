@@ -1,0 +1,26 @@
+{
+  "name": "make-image-playable",
+  "version": "1.0.0",
+  "description": "This is a simple project to allow you convert jpg file to grayscale file.",
+  "main": "node/app.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "build": "ssvmup build",
+    "start": "node node/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AtlasChuen/ssvm-nodejs-starter.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AtlasChuen/ssvm-nodejs-starter/issues"
+  },
+  "homepage": "https://github.com/AtlasChuen/ssvm-nodejs-starter#readme",
+  "dependencies": {
+    "image-output": "^2.4.2"
+  }
+}

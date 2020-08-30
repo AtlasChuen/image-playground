@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const { save, jpeg_compress } = require('../pkg/lib.js');
+const { grayscalify, jpeg_compress } = require('../pkg/lib.js');
 const fileUpload = require('express-fileupload');
 const {createImageData, Canvas} = require('canvas');
 const fs = require("fs");
@@ -8,46 +8,40 @@ const output = require('image-output')
 
 const app = express();
 const port = 8080;
-app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/../pkg'));
+app.use(express.static(__dirname + '/public'));
+
 app.use(express.urlencoded({ extended: false }));
 app.use(fileUpload());
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs');
 
-app.get('/', (req, res) => {
-  var c = new Canvas(320, 240);
-  var ctx = c.getContext("2d");
-  var imgData = ctx.createImageData(100, 100);
-  var i;
-  for (i = 0; i < imgData.data.length; i += 4) {
-    imgData.data[i+0] = 255;
-    imgData.data[i+1] = 0;
-    imgData.data[i+2] = 0;
-    imgData.data[i+3] = 255;
+app.get('/', (req, res) => { res.render("index", {
+  imgSrc: ''
+}) })
+
+app.post('/grayscalify', function(req, res) {
+  if (!req.files || Object.keys(req.files).length === 0) {
+    return res.status(400).send('No files were uploaded.');
   }
-  // ctx.drawImage(imgData, 10, 70);
-  ctx.putImageData(imgData, 10, 10); 
-
-  console.log(__dirname);
+  if(req.files.image.mimetype !== "image/jpeg") {
+    return res.status(400).send('Only jpg supported.');
+  }
+  grayscalify(req.files.image.data);
   res.render("index", {
-  // imgSrc: 'uploaded/test.jpg'
-  imgSrc: c.toDataURL()
-})}
-);
+    imgSrc: 'uploaded/uploaded.jpg'
+  });
+})
 
-app.post('/image', async function(req, res) {
+app.post('/compress', async function(req, res) {
   if (!req.files || Object.keys(req.files).length === 0) {
     return res.status(400).send('No files were uploaded.');
   }
   console.log(req.files.image); // the uploaded file object
 
-  // var gray = save(req.files.image.data);
-
   var compressed_gray = jpeg_compress(req.files.image.data);
-  // create chess pattern png from raw pixels data
-  var c = new Canvas(320, 240);
+  // var c = new Canvas(320, 240);
   var ctx = c.getContext("2d");
   output({
     data: compressed_gray,

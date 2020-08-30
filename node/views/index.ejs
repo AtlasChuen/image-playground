@@ -4,17 +4,24 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Demo</title>
+    <link href="css/index.css" rel="stylesheet" type="text/css">
   </head>
 
   <body>
     <div class="container">
-      <h1>Calling a Rust function in Node.js</h1>
+      <h1>Play with Images</h1>
+      <h2> Warm Up </h2>
       <p class="lead">Convert JPG to GrayScale</p>
-      <form action="image" method="post" encType="multipart/form-data">
+      <form action="grayscalify" method="post" encType="multipart/form-data">
         <input name="image" type="file"/>
         <input name="submit" type="submit" value="submit">
       </form>
+      <% if (imgSrc) { %>
       <img src=<%= imgSrc %> />
+      <% } %>
+      <h2> Do you know how JPEG works? </h2>
+      <h4> Work In Progress... </h4>
+
 </canvas>
     </div> <!-- /container -->
   </body>
